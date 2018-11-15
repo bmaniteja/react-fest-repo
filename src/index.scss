@@ -1,0 +1,13 @@
+@import './stylesheets/custom';
+
+html {
+  box-sizing: border-box;
+  font-size: ($base__font-size*1px);
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}

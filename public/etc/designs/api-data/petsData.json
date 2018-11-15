@@ -1,0 +1,14 @@
+{
+	"pets": [
+		{
+			"name": "Snoopy",
+			"category": "dog",
+			"imageUrl": ""
+		},
+		{
+			"name": "Tommy",
+			"category": "cat",
+			"imageUrl": ""
+		}
+	]
+}

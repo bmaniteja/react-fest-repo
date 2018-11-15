@@ -1,0 +1,12 @@
+@import '../../stylesheets/custom.scss';
+
+.display-card {
+	border: 1px solid $black;
+	width: 150px;
+	text-align: center;
+	padding: 10px 0;
+	.display-image {
+		display: block;
+		width: inherit;
+	}
+}

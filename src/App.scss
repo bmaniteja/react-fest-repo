@@ -1,0 +1,5 @@
+@import './stylesheets/custom';
+
+.App-first-link {
+    @include font($font-auditype-normal, $font-size-18, $font-weight-light, $red, 1.38, normal);
+}
