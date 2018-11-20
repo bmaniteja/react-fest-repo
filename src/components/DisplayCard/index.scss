@@ -1,12 +1,36 @@
 @import '../../stylesheets/custom.scss';
 
 .display-card {
-	border: 1px solid $black;
-	width: 150px;
+	width: 300px;
 	text-align: center;
-	padding: 10px 0;
-	.display-image {
-		display: block;
-		width: inherit;
+	display: inline-table;
+	.card {
+		border: 1px solid $black;
+		margin: 10px 0;
+		padding: 10px 0;
+		width: 100%;
+		h1 {
+			display: -webkit-inline-box;
+		}
+		.display-image {
+			display: block;
+			width: inherit;
+		}
+		.book-marked {
+		    background-image: url(/images/book-marked.png);
+		}
+		.star-icon {
+			background-image: url(/images/star.png);
+		}
+		.star {
+			width: 20px;
+		    height: 20px;
+		    position: relative;
+		    float: right;
+		    right: 10px;
+		    background-repeat: no-repeat;
+		    display: inline-block;
+		    z-index: 2;
+		}
 	}
 }
