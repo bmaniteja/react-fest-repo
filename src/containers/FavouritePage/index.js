@@ -13,7 +13,7 @@ import _ from 'lodash';
 import {fetchAllData, postData} from '../../actions/app'
 import APP_ACTIONS from '../../constants/app';
 
-class LandingPage extends React.Component {
+class FavouritePage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -55,21 +55,21 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    const {petsData} = this.props;
-      return (
-        <div className="landing-page">
-          <div className="col-md-3">
-            <button className="col-md-12"><a href="/favouroites">View Favourites</a></button>
-          </div>
-          <div className="col-md-9">
-            { 
-              _.map(petsData, (data, k) => {
-                 return <DisplayCard data={data} key={k} updateFavourite={this.updateFavourite} idx={k}/>;
-               })
-            }
-          </div>
+    const petsData = this.props.petsData.filter((data) => { return data.isFavourite; });
+    return (
+      <div className="favourite-page">
+        <div className="col-md-3">
+          <button className="col-md-12"><a href="/">View All</a></button>
         </div>
-      );
+        <div className="col-md-9">
+          { 
+            _.map(petsData, (data, k) => {
+               return <DisplayCard data={data} key={k} updateFavourite={this.updateFavourite} idx={k}/>;
+             })
+          }
+        </div>
+      </div>
+    );
   }
 }
 
@@ -87,4 +87,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LandingPage)
+)(FavouritePage)
