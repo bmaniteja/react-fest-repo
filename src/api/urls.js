@@ -1,3 +1,4 @@
 export default {
-    "petsData": "/etc/designs/api-data/petsData.json"
+    "petsData": "/getPetsList",
+    "updateFavourite": "/updateFavourite"
 }

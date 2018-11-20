@@ -1,7 +1,7 @@
 import React from "react";
 // import { push } from 'connected-react-router'
-// import { bindActionCreators } from 'redux'
-// import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import {
   DisplayCard
 } from "../../components";
@@ -10,22 +10,14 @@ import "./index.scss";
 import apiUrls from '../../api/urls';
 import _ from 'lodash';
 
-export default class LandingPage extends React.Component {
+import {fetchAllData, postData} from '../../actions/app'
+import APP_ACTIONS from '../../constants/app';
+
+class LandingPage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      petsData: [{
-                    "name": "Snoopy",
-                    "category": "Dog",
-                    "imageUrl": "https://smedia2.intoday.in/lallantop/wp-content/uploads/2016/05/cute-dog_160516-023453.jpg",
-                    "isFavourite": false
-                  },
-                  {
-                    "name": "Tommy",
-                    "category": "Cat",
-                    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg6mKUF2r_U-_Nz10Wnk4TB5NLniqvO3oUHJW3at3cJp5UzffsMg",
-                    "isFavourite": true
-                  }],
+      petsData: [],
       isFavouriteScreen: false
     };
     this.updateFavourite = this.updateFavourite.bind(this);
@@ -54,16 +46,15 @@ export default class LandingPage extends React.Component {
   }
 
   componentWillMount(){
-    // this.props.fetchAllData({apiUrl: apiUrls.petsData, type: FETCH_DATA});
+    this.props.fetchAllData({apiUrl: apiUrls.petsData, type: APP_ACTIONS.FETCH_DATA});
   }
 
   updateFavourite(idx, data){
-    let {petsData} = this.state;
+    let {petsData} = this.props;
     data.isFavourite = !data.isFavourite;
     petsData[idx] = data;
-    this.setState({
-      petsData: petsData
-    })
+
+    this.props.postData({apiUrl: apiUrls.updateFavourite, type: APP_ACTIONS.FETCH_DATA, data: petsData});
   }
 
   showFavourites(){
@@ -75,7 +66,7 @@ export default class LandingPage extends React.Component {
   }
 
   render() {
-    let petsData = this.state.isFavouriteScreen ? this.state.petsData.filter((data) => { return data.isFavourite; }) : this.state.petsData;
+    let petsData = this.state.isFavouriteScreen ? this.props.petsData.filter((data) => { return data.isFavourite; }) : this.props.petsData;
       return (
         <div className="landing-page">
           <div className="col-md-3">
@@ -94,15 +85,18 @@ export default class LandingPage extends React.Component {
   }
 }
 
-// const mapStateToProps = ({ pets }) => ({
-//   petsData: pets.pets
-// })
+const mapStateToProps = ({app}) => {
+  return {
+    petsData: app.petsData 
+  }
+}
 
-// const mapDispatchToProps = dispatch => bindActionCreators({
-//   fetchAllData
-// }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchAllData,
+  postData
+}, dispatch)
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(LandingPage)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LandingPage)

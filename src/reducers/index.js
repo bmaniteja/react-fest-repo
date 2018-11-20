@@ -1,1 +1,6 @@
-export { default as app } from './app';
+import { combineReducers } from 'redux'
+import app from './app'
+
+export default combineReducers({
+    app
+})
