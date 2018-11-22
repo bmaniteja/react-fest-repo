@@ -21,7 +21,7 @@ export default class DisplayCard extends React.Component {
                 <div className="card">
                     <span className={isFavourite ? 'star book-marked' : 'star star-icon'} onClick={this.bookMarkItem}></span>
                 	<h1>{name}</h1>
-                	<img src={imageUrl} className="display-image" />
+                	<img src={imageUrl} className="display-image" onClick={() => window.location = ('/details?petNo='+this.props.idx)} />
                 	<div>
                 		<span>Category: </span>
                 		<span>{category}</span>

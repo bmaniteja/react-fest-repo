@@ -16,9 +16,6 @@ import APP_ACTIONS from '../../constants/app';
 class LandingPage extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      petsData: []
-    };
     this.updateFavourite = this.updateFavourite.bind(this);
   }
 
