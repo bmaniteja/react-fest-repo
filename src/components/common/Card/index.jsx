@@ -1,5 +1,6 @@
-import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import React from 'react';
+import { Card, Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 class CardExampleCard extends React.Component {
     render() {
@@ -10,9 +11,9 @@ class CardExampleCard extends React.Component {
                     <Card.Header>{this.props.title}</Card.Header>
                 </Card.Content>
                 <Card.Content extra>
-                    <a>
+                <Link to={this.props.link}>
                         View All
-                    </a>
+                </Link>
                 </Card.Content>
             </Card>
         );
