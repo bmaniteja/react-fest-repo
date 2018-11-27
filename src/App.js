@@ -6,6 +6,8 @@ import './App.scss';
 import MainHeader from './components/containers/Header';
 import AppHome from './components/containers/Home';
 import PetsPage from './components/containers/Pets';
+import PetDetailsPage from './components/containers/Pet';
+import LoginPage from './components/containers/Login';
 
 class App extends Component {
 
@@ -17,6 +19,8 @@ class App extends Component {
 						<MainHeader />
 						<Route path="/" exact component={AppHome} />
 						<Route path="/pets/:type" exact component={PetsPage} />
+						<Route path="/pet/:type/:id" exact component={PetDetailsPage} />
+						<Route path="/login" exact component={LoginPage} />
 					</React.Fragment>
 				</Router>
 			</div>
