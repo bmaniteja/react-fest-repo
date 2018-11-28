@@ -3,7 +3,6 @@ import { Container, Header, Image, Comment, Form, Button } from 'semantic-ui-rea
 import 'whatwg-fetch';
 import Moment from 'react-moment';
 import firebase from 'firebase';
-import sillyname from 'sillyname';
 
 class PetDetails extends Component {
     constructor(props) {
@@ -23,10 +22,14 @@ class PetDetails extends Component {
             }).then((petsDetails) => {
                 this.setState({ petsDetails });
             });
-        firebase.database().ref(`/pets/${this.props.match.params.type}/${this.props.match.params.id}/comments`).on('value', snapShot => {
-            this.setState({ comments: snapShot.val() })
+        firebase.database().ref(`/pets/${this.props.match.params.type}/${this.props.match.params.id}/comments`).on('child_added', snapShot => {
+            this.setState({ comments: {...this.state.comments, [snapShot.key]: snapShot.val()} })
         });
 
+    }
+
+    componentWillUnmount() {
+        firebase.database().ref(`/pets/${this.props.match.params.type}/${this.props.match.params.id}/comments`).off();
     }
 
     addComment = () => {
@@ -34,7 +37,7 @@ class PetDetails extends Component {
             firebase.database().ref(`/pets/${this.props.match.params.type}/${this.props.match.params.id}/comments`).push({
                 "avatar": "https://react.semantic-ui.com/images/avatar/small/matt.jpg",
                 "comment": this.state.currentComment,
-                "from": sillyname(),
+                "from": firebase.auth().currentUser.displayName,
                 "time": new Date().getTime()
             }, () => {
                 this.setState({currentComment: ""});

@@ -14,7 +14,8 @@ const combinerRootReducer = combineReducers({
 export default function configureStore() {
     const { logger } = require('redux-logger');
     const middleware = [thunk, logger];
-    const store = createStore(combinerRootReducer, compose(applyMiddleware(...middleware)));
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    const store = createStore(combinerRootReducer, composeEnhancers(applyMiddleware(...middleware)));
 
     return store;
 }

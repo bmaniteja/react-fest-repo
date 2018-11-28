@@ -10,7 +10,7 @@ class AppHeader extends Component {
             <Menu fixed='top' inverted>
                 <Container>
                     <Link to={'/'}>
-                        <Menu.Item as='a' header>
+                        <Menu.Item header>
                             <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
                             Pet Store
                         </Menu.Item>
@@ -19,12 +19,12 @@ class AppHeader extends Component {
                         <Dropdown.Menu>
                             <Dropdown.Item>
                                 <Link to={'/pets/dogs'}>
-                                    <a>Dogs</a>
+                                    <span style={{color: "black"}}>Dogs</span>
                                 </Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
                                 <Link to={'/pets/cats'}>
-                                    <a>Cats</a>
+                                    <span style={{color: "black"}}>Cats</span>
                                 </Link>
                             </Dropdown.Item>
                         </Dropdown.Menu>
