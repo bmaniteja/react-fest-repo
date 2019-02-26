@@ -1,31 +1,21 @@
 import React, { Component } from 'react';
+import { Connect } from 'react-redux';
 import { Container, Header } from 'semantic-ui-react';
 import 'whatwg-fetch';
 import HomeCard from '../../common/Card';
+import { fetchPetList } from '../../../actions/petList';
 
 class PetsHome extends Component {  
     constructor(props) {
-        super();
-
-        this.state = {
-            petsList: []
-        };
-    }
-
-    componentWillMount() {
-        window.fetch(`https://us-central1-react-fest.cloudfunctions.net/getPetsList?type=${this.props.match.params.type}`)
-        .then((response) => {
-            return response.json()
-        }).then((petsList) => {
-            this.setState({ petsList });
-        })
+        super(props);
+        props.dispatch(fetchPetList(props.match.params.type));
     }
 
     render() {
         return (
             <Container text style={{ marginTop: '7em' }}>
                 <Header as='h1'>{this.props.match.params.type}</Header>
-                {this.state.petsList.map( (pet, index) => {
+                {this.props.petsList.list.map( (pet, index) => {
                     return <HomeCard link={`/pet/${this.props.match.params.type}/${index}`} title={pet.name} image={pet.image}/>
                 })}
             </Container>
@@ -33,4 +23,10 @@ class PetsHome extends Component {
     }
 }
 
-export default PetsHome;
+const mapStateToProps(state) => {
+    return {
+        petsList: state.petsList
+    };
+};
+
+export default Connect(mapStateToProps)(PetsHome);
